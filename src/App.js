@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+//import axios from 'axios'
+//import $ from "jquery";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Header from './components/Header'
+import ProjectList from './components/ProjectList'
+import NewProject from './components/NewProject'
+import Login from './components/Login'
+import Register from './components/Register'
+import Profile from './components/Profile'
+import NewUser from './components/users/NewUser'
+import ListUser from './components/users/ListUser'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoggedIn: false,
+      user: {}
+    };
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <div className="container">
+            <Route exact path='/' component={ProjectList} />
+            <Route path='/create' component={NewProject} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/createUser" component={NewUser} />
+            <Route exact path="/listUser" component={ListUser} />
+          </div>
+        </div>
+      </BrowserRouter>
+    )
+  }
 }
 
 export default App;
